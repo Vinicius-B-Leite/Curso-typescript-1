@@ -14,14 +14,14 @@ export class NegociacaoController{
 
 
     constructor(){
-        this.inputData = document.querySelector('#data')
-        this.inputQuantidade = document.querySelector('#quantidade')
-        this.inputValor = document.querySelector('#valor')
+        this.inputData = <HTMLInputElement>document.querySelector('#data')
+        this.inputQuantidade = document.querySelector('#quantidade') as HTMLInputElement
+        this.inputValor = document.querySelector('#valor') as HTMLInputElement
         this.negociacaoView.update(this.negociacoes)
     }
 
     public adionar(): void{
-        const negociacao = this.criaNegociacao()
+        const negociacao =  Negociacao.criaDe(this.inputData.value, this.inputQuantidade.value,this.inputValor.value)
 
         if (!this.ehDiaUtil(negociacao.data)){
              this.mensagemVieew.update("Só dia de semana")
@@ -34,14 +34,6 @@ export class NegociacaoController{
 
     private ehDiaUtil(data: Date){
         return data.getDate() > DiasdaSemana.DOMINGO && data.getDay() < DiasdaSemana.SABADO
-    }
-
-    private criaNegociacao(): Negociacao{
-        const exp = /-/g
-        const data = new Date(this.inputData.value.replace(exp, ','))
-        const qnt = parseInt(this.inputQuantidade.value)
-        const valor = parseFloat(this.inputValor.value)
-        return new Negociacao(data, valor,qnt)
     }
     
     private limparForm():void{

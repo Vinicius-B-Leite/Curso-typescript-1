@@ -24,5 +24,13 @@ export class Negociacao{
 
     get volume():number{
         return this._quantidade * this._valor
+    } 
+
+    public static criaDe(dataS: string, quantidadeS: string, valorS:string): Negociacao{
+        const exp = /-/g
+        const data = new Date(dataS.replace(exp, ','))
+        const qnt = parseInt(quantidadeS)
+        const valor = parseFloat(valorS)
+        return new Negociacao(data, valor,qnt)
     }
 }
