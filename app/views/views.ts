@@ -7,7 +7,7 @@ export abstract class View<T>{
         if(elemetno){
             this.elemento = elemetno as HTMLElement
         }else{
-            throw Error("Verifique se o seletor " + seletor + " existe,")
+            throw Error("Verifique se o seletor " + seletor + " existe")
         }
     }
 
